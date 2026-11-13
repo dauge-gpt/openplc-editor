@@ -1,0 +1,82 @@
+{
+  "schema": 1,
+  "component": "editor",
+  "baseline_commit": "9e979504193b1fbacf87112822438664a1f7b11a",
+  "workflows": [
+    {
+      "original": ".github/workflows/build.yml",
+      "archive": ".github/upstream-workflows/build.yml.disabled",
+      "sha256": "1c0d14f4dc4280d48882718dea0e488cafd1f115dd7784d2958ba6d307dd4a20"
+    },
+    {
+      "original": ".github/workflows/ci-architecture.yml",
+      "archive": ".github/upstream-workflows/ci-architecture.yml.disabled",
+      "sha256": "8f4b898b46174d8376c108e1032609d1543305155d48cf023e917c3acdf17c16"
+    },
+    {
+      "original": ".github/workflows/ci-build.yml",
+      "archive": ".github/upstream-workflows/ci-build.yml.disabled",
+      "sha256": "9fbba35678b54c4558e567e4c4fae0a45b89393cda0dd8dcb2b5ae21e0fa9376"
+    },
+    {
+      "original": ".github/workflows/ci-format.yml",
+      "archive": ".github/upstream-workflows/ci-format.yml.disabled",
+      "sha256": "97c4138db978a767d3b0f1d30756afd5e29bef89ac5c2873f748418c61d447ec"
+    },
+    {
+      "original": ".github/workflows/ci-lint.yml",
+      "archive": ".github/upstream-workflows/ci-lint.yml.disabled",
+      "sha256": "1589349e948c02965c1aa5efaffeb9c4ceebb907050cde78740bc96329c6dbb0"
+    },
+    {
+      "original": ".github/workflows/ci-sync.yml",
+      "archive": ".github/upstream-workflows/ci-sync.yml.disabled",
+      "sha256": "287539dd4f6fe6cad8fd8a4ece2d5c24155b39052f6a5f464b38d2ff4d769588"
+    },
+    {
+      "original": ".github/workflows/ci-unit-tests.yml",
+      "archive": ".github/upstream-workflows/ci-unit-tests.yml.disabled",
+      "sha256": "c79b2de1f4c09b78276b2e0d0c27dbe367390f7f52905b919755ec8089ae7357"
+    },
+    {
+      "original": ".github/workflows/ci.yml",
+      "archive": ".github/upstream-workflows/ci.yml.disabled",
+      "sha256": "7742852e4d041a50cfc3793caaa9015ab20539483f90cff05cba74c055724770"
+    },
+    {
+      "original": ".github/workflows/cla.yml",
+      "archive": ".github/upstream-workflows/cla.yml.disabled",
+      "sha256": "ab320652271fe617abed03987130400c18baf30925692e1d51e5dff97e331984"
+    },
+    {
+      "original": ".github/workflows/claude-code-review.yml",
+      "archive": ".github/upstream-workflows/claude-code-review.yml.disabled",
+      "sha256": "df9b717910725bc13b75312f1913134b8ed28e436d3f19e1d3b3a0033abfbc46"
+    },
+    {
+      "original": ".github/workflows/claude.yml",
+      "archive": ".github/upstream-workflows/claude.yml.disabled",
+      "sha256": "87337a6a879160b85e8b555b43a8828b72f9400c6bd0ba50805eae41c352fa13"
+    },
+    {
+      "original": ".github/workflows/code_quality.yml",
+      "archive": ".github/upstream-workflows/code_quality.yml.disabled",
+      "sha256": "04febd24407860841fa9d915372e9415bf3cf595884c8880db59d0ccf81bebdb"
+    },
+    {
+      "original": ".github/workflows/codeql-analysis.yml",
+      "archive": ".github/upstream-workflows/codeql-analysis.yml.disabled",
+      "sha256": "e1ec41bd421b4747aeb6baa632a722faa41a4c9d0c6f405f521f71869af4c121"
+    },
+    {
+      "original": ".github/workflows/release.yml",
+      "archive": ".github/upstream-workflows/release.yml.disabled",
+      "sha256": "97ba9437748c475dbf1f3fb93b2dce4d62b14bca8281641cc8089792e0c057f7"
+    },
+    {
+      "original": ".github/workflows/test.yml",
+      "archive": ".github/upstream-workflows/test.yml.disabled",
+      "sha256": "80b343b9c57031e79702c31c30a460cec3f5dea9443c57ff27493ff0bf3f2b7e"
+    }
+  ]
+}
