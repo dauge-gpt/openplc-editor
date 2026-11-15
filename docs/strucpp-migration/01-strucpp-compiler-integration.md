@@ -1,5 +1,9 @@
 # Phase 1: STruC++ Compiler Integration
 
+> Historical design. The VX fork now installs the compiler through `npm ci` with
+> exact archive integrity and a transitive dependency lock; setup scripts verify
+> it. Follow [COMPILER-LOCK.md](../../ci/COMPILER-LOCK.md) for installation and upgrades.
+
 ## Goal
 
 Set up the infrastructure to use STruC++ as a dependency in the OpenPLC Editor. This phase

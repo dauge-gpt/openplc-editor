@@ -119,7 +119,7 @@ const configuration: webpack.Configuration = {
 
   optimization: {
     minimize: true,
-    minimizer: [new TerserPlugin(), new CssMinimizerPlugin()],
+    minimizer: [new TerserPlugin({ parallel: 2 }), new CssMinimizerPlugin({ parallel: 2 })],
   },
 
   plugins: [

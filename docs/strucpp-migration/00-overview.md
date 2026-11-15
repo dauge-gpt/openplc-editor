@@ -1,8 +1,10 @@
 # STruC++ Migration: Overview
 
 > **Status.** STruC++ is the editor's ST compiler today: it is pinned in
-> `binary-versions.json` (v0.5.x) and installed as an npm tarball by
-> `scripts/download-binaries.ts`; `compiler-module.ts` compiles ST to C++ with it.
+> `binary-versions.json` (v0.7.0) and installed by `npm ci` from the exact archive
+> and dependency graph in `package-lock.json`; setup scripts verify the install.
+> See [the current fork compiler contract](../../ci/COMPILER-LOCK.md).
+> `compiler-module.ts` compiles ST to C++ with it.
 > The editor no longer ships or invokes a local `iec2c` binary; remaining
 > `iec2c`/`matiec` mentions in `src/` are comments. MatIEC itself is not gone:
 > on the Runtime v3 path the editor uploads plain `program.st` and the runtime
@@ -11,6 +13,9 @@
 > (Phase 9) remains paused.
 
 ## Problem Statement
+
+The phase descriptions below are historical design notes. Their one-line version
+update and downloader instructions are superseded by the linked compiler lock contract.
 
 The OpenPLC Editor used MatIEC (`iec2c`) to compile IEC 61131-3 Structured Text into C code,
 and `xml2st` to generate debug infrastructure. This pipeline has two critical issues:

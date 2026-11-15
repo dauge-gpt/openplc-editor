@@ -1,6 +1,7 @@
 # Logs
 logs
 *.log
+!/ci/evidence/node22-2026-11-15/*.log
 
 # Runtime data
 pids

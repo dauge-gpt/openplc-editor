@@ -1,0 +1,10 @@
+PASS src src/middleware/shared/vendor-document/__tests__/configurator-client.test.ts (11.436 s)
+PASS src src/backend/shared/utils/vpp/__tests__/build-vpp-plugin-files.test.ts
+PASS src src/middleware/shared/vendor-document/__tests__/archive-schema.test.ts
+
+Test Suites: 3 passed, 3 total
+Tests:       45 passed, 45 total
+Snapshots:   0 total
+Time:        14.542 s
+Ran all test suites within paths "src/middleware/shared/vendor-document/__tests__/archive-schema.test.ts", "src/middleware/shared/vendor-document/__tests__/configurator-client.test.ts", "src/backend/shared/utils/vpp/__tests__/build-vpp-plugin-files.test.ts".
+Test results written to: ../../m01-compiler-evidence/editor-archive-schema-jest-node22.json

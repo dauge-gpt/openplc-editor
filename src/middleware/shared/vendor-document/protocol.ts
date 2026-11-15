@@ -21,7 +21,14 @@ const MAX_IDENTIFIER_LENGTH = 256
 export const configuratorArchiveSchema = z
   .string()
   .max(MAX_ARCHIVE_HEX_LENGTH)
-  .regex(/^(?:[0-9a-fA-F]{2})+$/, 'is not hex')
+  // Zod string checks accumulate errors; pipe prevents scanning oversized data.
+  // Avoid a repeated group whose regexp stack can overflow on large archives.
+  .pipe(
+    z.string().refine(
+      (archive) => archive.length > 0 && archive.length % 2 === 0 && !/[^0-9a-fA-F]/.test(archive),
+      'is not hex',
+    ),
+  )
 
 export const deviceReferenceSchema = z.object({
   guid: z.string().max(MAX_IDENTIFIER_LENGTH),

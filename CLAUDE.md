@@ -51,7 +51,7 @@ External contributors without Jira access follow CONTRIBUTING.md; GitHub Issues 
 **Package manager:** `npm` (not pnpm)
 
 ```bash
-npm install              # Install deps + download binaries + build DLL cache
+npm ci                   # Install locked deps + verify compiler + build DLL cache
 npm run dev              # Full dev mode (main + renderer + Electron, port 1313)
 npm run build            # Production build (main + renderer)
 npm run build:main       # Electron main process only
@@ -73,15 +73,16 @@ npm run validate:arch    # Architecture layer dependency validation
 
 ## Verify before pushing (CI parity)
 
-CI runs these commands directly, not `npm run lint` or `npm run format`. The `lint`
-script passes its glob unquoted, so the shell expands it and only part of `src/` is
-linted; `format` rewrites files and so passes locally while CI's `--check` still fails. Tests run under
+The VX fork baseline entrypoint is `bash ci/vx-check.sh`; its trusted workflow is
+in the private AHU repository. See `ci/VX-CI.md`. The upstream commands below are
+reference only; upstream workflows are inactive in this fork. `npm run lint` now
+quotes its glob to cover all of `src/`. `format` rewrites files and is not a check. Tests run under
 **Jest** (not Vitest), and both `tsc` and `jest` import the `strucpp` package,
 so it must be installed first or they fail with `TS2307: Cannot find module
-'strucpp'`. Run each exact command (from `.github/workflows/`) green before you push:
+'strucpp'`. The upstream check commands are:
 
 ```bash
-npm ci --ignore-scripts && npm run setup:strucpp   # required first, or tsc/jest can't resolve 'strucpp'
+npm ci --ignore-scripts && npm run setup:strucpp   # install locked compiler, then verify it
 npx tsc --noEmit                                   # ci-build:       Build Check
 npx prettier --check "./src/**/*.{ts,tsx}"         # ci-format:      Format Check
 npx eslint "./src/**/*.{ts,tsx}"                   # ci-lint:        Lint Check
@@ -90,13 +91,14 @@ npx jest --config jest.config.json --collectCoverage --ci   # ci-unit-tests
 
 `prettier --check` only reports; fix with `npx prettier --write <files>`.
 
-`npm run setup:strucpp` installs the **pinned** STruC++ from its GitHub release
-and overwrites whatever is in `node_modules/strucpp`, so a locally patched build
-(testing an unreleased parser change) is wiped by the very command CI runs. Jest
+`npm ci` installs the integrity-pinned STruC++ release and its locked dependency
+graph. `npm run setup:strucpp` only verifies that installation; it does not repair
+or overwrite it. Reinstall with `npm ci` before verification if testing a locally
+patched compiler. See `ci/COMPILER-LOCK.md` for provenance and reports. Jest
 loads the parser through `dist/parser-bundle.cjs` — STruC++'s ESM chain does not
 survive Jest's CJS transform — so the pinned release has to be one that ships
-that bundle, or every suite fails to load. Run the suite again after
-`setup:strucpp` rather than trusting a run made against a patched install.
+that bundle, or every suite fails to load. Run the suite after a clean `npm ci`
+rather than trusting a run made against a patched install.
 The shared surface (`src/frontend`, `src/middleware/shared`, `src/backend/shared`)
 is byte-identical with **openplc-web** — mirror any change and run the check suite
 in BOTH repos (web uses **Vitest**, not Jest, so a test can pass here and fail there).
@@ -586,4 +588,4 @@ new alias.
 - **Node.js:** 22.x
 - **Dev server port:** 1313
 - **Supported platforms:** macOS, Windows, Linux (x64 & ARM64)
-- **Binaries:** Auto-downloaded via `scripts/download-binaries.ts` during `npm install`
+- **Compiler:** Installed by `npm ci` with integrity from `package-lock.json`; setup scripts verify it

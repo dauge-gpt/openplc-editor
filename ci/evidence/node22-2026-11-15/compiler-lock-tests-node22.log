@@ -1,0 +1,65 @@
+TAP version 13
+# Subtest: reviewed lock closes the eight-package compiler production graph
+ok 1 - reviewed lock closes the eight-package compiler production graph
+  ---
+  duration_ms: 42.349624
+  ...
+# Subtest: rejects compiler digest drift before installation
+ok 2 - rejects compiler digest drift before installation
+  ---
+  duration_ms: 66.375692
+  ...
+# Subtest: rejects compiler source drift before installation
+ok 3 - rejects compiler source drift before installation
+  ---
+  duration_ms: 51.951528
+  ...
+# Subtest: rejects missing transitive dependency before installation
+ok 4 - rejects missing transitive dependency before installation
+  ---
+  duration_ms: 67.511583
+  ...
+# Subtest: rejects missing transitive integrity before installation
+ok 5 - rejects missing transitive integrity before installation
+  ---
+  duration_ms: 59.33952
+  ...
+# Subtest: rejects truncated transitive integrity before installation
+ok 6 - rejects truncated transitive integrity before installation
+  ---
+  duration_ms: 32.160475
+  ...
+# Subtest: rejects unreviewed dependency source before installation
+ok 7 - rejects unreviewed dependency source before installation
+  ---
+  duration_ms: 58.452595
+  ...
+# Subtest: rejects nested dependency shadow before installation
+ok 8 - rejects nested dependency shadow before installation
+  ---
+  duration_ms: 40.381561
+  ...
+# Subtest: rejects a manifest that bypasses the reviewed compiler URL
+ok 9 - rejects a manifest that bypasses the reviewed compiler URL
+  ---
+  duration_ms: 31.285337
+  ...
+# Subtest: checks installed dependency versions, graph and resources without changing the lock
+ok 10 - checks installed dependency versions, graph and resources without changing the lock
+  ---
+  duration_ms: 102.878945
+  ...
+# Subtest: npm ci enforces SHA256 before a dependency install script can execute
+ok 11 - npm ci enforces SHA256 before a dependency install script can execute
+  ---
+  duration_ms: 1171.430458
+  ...
+1..11
+# tests 11
+# suites 0
+# pass 11
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1831.219214

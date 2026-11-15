@@ -1,0 +1,61 @@
+{
+  "schema": "vx.openplc.compiler-lock/1",
+  "status": "pass",
+  "installed": true,
+  "version": "0.7.0",
+  "compiler_sha256": "8d78ae92d931b87c06145520222d1491206f424c147ec66ea84653cb8b0e1be5",
+  "package_json_sha256": "67f23d798cdda6ca5d87b4c9a107a5187ea529d4142271892df80e1371985955",
+  "package_lock_sha256": "f2a60cb35cf5061f6f2309e0ecb2c6584fb9b36f7f2af33078d56b52aa07342b",
+  "binary_versions_sha256": "0610c6c321abe2e7c971817e56ae1345de6b555f5532221753f2feacdd5808b3",
+  "packages": [
+    {
+      "name": "@chevrotain/cst-dts-gen",
+      "version": "11.0.3",
+      "resolved": "https://registry.npmjs.org/@chevrotain/cst-dts-gen/-/cst-dts-gen-11.0.3.tgz",
+      "integrity": "sha512-BvIKpRLeS/8UbfxXxgC33xOumsacaeCKAjAeLyOn7Pcp95HiRbrpl14S+9vaZLolnbssPIUuiUd8IvgkRyt6NQ=="
+    },
+    {
+      "name": "@chevrotain/gast",
+      "version": "11.0.3",
+      "resolved": "https://registry.npmjs.org/@chevrotain/gast/-/gast-11.0.3.tgz",
+      "integrity": "sha512-+qNfcoNk70PyS/uxmj3li5NiECO+2YKZZQMbmjTqRI3Qchu8Hig/Q9vgkHpI3alNjr7M+a2St5pw5w5F6NL5/Q=="
+    },
+    {
+      "name": "@chevrotain/regexp-to-ast",
+      "version": "11.0.3",
+      "resolved": "https://registry.npmjs.org/@chevrotain/regexp-to-ast/-/regexp-to-ast-11.0.3.tgz",
+      "integrity": "sha512-1fMHaBZxLFvWI067AVbGJav1eRY7N8DDvYCTwGBiE/ytKBgP8azTdgyrKyWZ9Mfh09eHWb5PgTSO8wi7U824RA=="
+    },
+    {
+      "name": "@chevrotain/types",
+      "version": "11.0.3",
+      "resolved": "https://registry.npmjs.org/@chevrotain/types/-/types-11.0.3.tgz",
+      "integrity": "sha512-gsiM3G8b58kZC2HaWR50gu6Y1440cHiJ+i3JUvcp/35JchYejb2+5MVeJK0iKThYpAa/P2PYFV4hoi44HD+aHQ=="
+    },
+    {
+      "name": "@chevrotain/utils",
+      "version": "11.0.3",
+      "resolved": "https://registry.npmjs.org/@chevrotain/utils/-/utils-11.0.3.tgz",
+      "integrity": "sha512-YslZMgtJUyuMbZ+aKvfF3x1f5liK4mWNxghFRv7jqRR9C3R3fAOGTTKvxXDa2Y1s9zSbcpuO0cAxDYsc9SrXoQ=="
+    },
+    {
+      "name": "chevrotain",
+      "version": "11.0.3",
+      "resolved": "https://registry.npmjs.org/chevrotain/-/chevrotain-11.0.3.tgz",
+      "integrity": "sha512-ci2iJH6LeIkvP9eJW6gpueU8cnZhv85ELY8w8WiFtNjMHA5ad6pQLaJo9mEly/9qUyCpvqX8/POVUTf18/HFdw=="
+    },
+    {
+      "name": "lodash-es",
+      "version": "4.17.21",
+      "resolved": "https://registry.npmjs.org/lodash-es/-/lodash-es-4.17.21.tgz",
+      "integrity": "sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw=="
+    },
+    {
+      "name": "strucpp",
+      "version": "0.7.0",
+      "resolved": "https://github.com/Autonomy-Logic/STruCpp/releases/download/v0.7.0/strucpp-0.7.0.tgz",
+      "integrity": "sha256-jXiuktkxuHwGFFUgIi0UkSBvQkwUfsZuqEZTy4sOG+U="
+    }
+  ],
+  "limitation": "Archive integrity is enforced by npm ci. This report does not qualify generated PLC programs or WB hardware."
+}
