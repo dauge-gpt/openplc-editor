@@ -1,6 +1,8 @@
 {
   "strucpp": {
     "version": "v0.7.0",
-    "repository": "Autonomy-Logic/STruCpp"
+    "repository": "Autonomy-Logic/STruCpp",
+    "sha256": "8d78ae92d931b87c06145520222d1491206f424c147ec66ea84653cb8b0e1be5",
+    "size": 2637939
   }
 }

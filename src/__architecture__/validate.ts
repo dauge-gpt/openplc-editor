@@ -4,13 +4,12 @@
  * Scans all .ts/.tsx files in src/, extracts imports, and validates
  * that dependency rules between architectural layers are respected.
  *
- * Run: npx tsx src/__architecture__/validate.ts
+ * Run: npm run validate:arch
  * Exit code 0 = pass, 1 = violations found
  */
 
 import { readdirSync, readFileSync, statSync } from 'node:fs'
 import { dirname, join, relative, resolve } from 'node:path'
-import { fileURLToPath } from 'node:url'
 
 // ---------------------------------------------------------------------------
 // Layer definitions
@@ -184,12 +183,9 @@ const LAYER_RULES: Record<LayerName, LayerRule> = {
 // Helpers
 // ---------------------------------------------------------------------------
 
-// `new URL(...).pathname` yields a URL-encoded path that, on win32, carries a
-// leading slash before the drive letter (/C:/Users/...). Passing that into
-// resolve() prepends the current drive, producing a doubled C:\C:\Users\...
-// prefix — which made validate:arch fail to even scan the tree. fileURLToPath
-// does the file:// -> filesystem conversion correctly on every platform.
-const SRC_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
+// ts-node uses the project's CommonJS config. __dirname is already a filesystem
+// path, so Windows drive letters and spaces need no file-URL conversion.
+const SRC_ROOT = resolve(__dirname, '..')
 
 function collectFiles(dir: string, ext: string[]): string[] {
   const results: string[] = []

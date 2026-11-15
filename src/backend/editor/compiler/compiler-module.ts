@@ -488,16 +488,15 @@ class CompilerModule {
     //
     //   - **Dev** (`npm run dev`): read from the root install at
     //     `node_modules/strucpp/src/runtime/include` — that's what
-    //     `scripts/download-binaries.ts` populates via `npm install
-    //     <tarball> --no-save`.
+    //     `npm ci` installs from the reviewed package-lock.json.
     //
     //   - **Packaged**: read from `process.resourcesPath/strucpp/
     //     runtime/include` — copied there by electron-builder's
     //     `extraResources` config.  We *cannot* read from the asar's
     //     own node_modules because electron-builder packs the asar
     //     based on `release/app/package.json`'s dependency tree and
-    //     strucpp isn't a declared dep (the version is pinned in
-    //     `binary-versions.json` instead), so the package gets pruned
+    //     strucpp is declared only in the root package.json,
+    //     not release/app/package.json, so the package gets pruned
     //     out of the asar entirely.
     //
     // arduino-cli still only ever sees the destination copy under
@@ -750,7 +749,7 @@ class CompilerModule {
 
   /**
    * Copy STruC++ C++ runtime headers to the target directory.
-   * These headers are downloaded by scripts/download-binaries.ts from the STruC++ release.
+   * These headers are installed by npm ci from the pinned STruC++ release archive.
    * Single recursive copy so any future subdirectory under
    * resources/strucpp/runtime/include/ propagates without code change.
    */

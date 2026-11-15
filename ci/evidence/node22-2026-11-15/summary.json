@@ -1,0 +1,170 @@
+{
+  "schema": "vx.openplc.editor-local-checks/1",
+  "date": "2026-11-15",
+  "scope": "Local Linux x86_64 diagnostic, not unity or a prepared CI image. No hardware deployment. M01 remains open until the complete final input passes the reviewed dispatcher.",
+  "upstream_fork_base": "d2aecd81ae100a8edb5ca45cdf1865dc80edf487",
+  "environment": {
+    "node": "22.14.0",
+    "npm": "10.9.2",
+    "node_archive": "https://nodejs.org/dist/v22.14.0/node-v22.14.0-linux-x64.tar.xz",
+    "node_archive_sha256": "69b09dba5c8dcb05c4e4273a4340db1005abeafe3927efda2bc5b249e80437ec",
+    "g++": "g++ (Debian 14.2.0-19) 14.2.0"
+  },
+  "input_sha256": {
+    "binary-versions.json": "0610c6c321abe2e7c971817e56ae1345de6b555f5532221753f2feacdd5808b3",
+    "package.json": "67f23d798cdda6ca5d87b4c9a107a5187ea529d4142271892df80e1371985955",
+    "package-lock.json": "f2a60cb35cf5061f6f2309e0ecb2c6584fb9b36f7f2af33078d56b52aa07342b",
+    "scripts/download-binaries.ts": "ba0004aa013c49e5f841a1a14dae1ec91b5e04e548f1b73fd9f5349ddf75c559",
+    "scripts/verify-compiler-lock.cjs": "bc1d1f2d278a7cbfe723b435302da239a9481756f9f673dc5010f22cdd1efe5b",
+    "scripts/test-compiler-lock.cjs": "6033d511e296392c592fceb68bf4a1a0195997076dac5215d521e0489a1ed809",
+    "src/__architecture__/validate.ts": "c6e9e637c327d8f32f17827fbd0c58ae091cbdf2c19242880387a8702654e469",
+    "ci/vx-check.sh": "4d4145b592b9115030a550a8eed368f36041851c29c1eb40a387fec291016ff9",
+    "configs/webpack/webpack.config.main.prod.ts": "47c2c16f947652dfc10d87a226b85030d966c5684d7c43dcb673801aeeec3074",
+    "configs/webpack/webpack.config.renderer.prod.ts": "4491ba04242fe2cfaf3343f53a556f10ff770e35485b04ac0ada49c4085ebd45",
+    "src/middleware/shared/vendor-document/protocol.ts": "4a166f5ce99b7ac5ac5bce4c707b8a9726e15f9dbbb4bfd62f1b3e84746c5e25",
+    "src/middleware/shared/vendor-document/__tests__/archive-schema.test.ts": "3cf2dbc5afc16a7dc9e0495e0fd20cc21e4bdbfebb4857866e3db42f9fd0841a"
+  },
+  "checks": {
+    "main_final_build": {
+      "command": "npm run build:main (minifier workers=2)",
+      "exit_code": 0,
+      "phase": "after archive schema fix"
+    },
+    "compiler_lock_regressions": {
+      "command": "node --test scripts/test-compiler-lock.cjs",
+      "exit_code": 0,
+      "passed": 11,
+      "failed": 0
+    },
+    "compiler_only_clean_install": {
+      "command": "npm ci --no-audit --no-fund",
+      "exit_code": 0,
+      "packages": 8,
+      "scope": "isolated manifest containing the reviewed compiler dependency graph"
+    },
+    "editor_clean_install": {
+      "command": "npm ci --no-audit --no-fund",
+      "exit_code": 0,
+      "packages_added": 2167,
+      "includes": "root postinstall compiler verification, Electron native dependency preparation and DLL build"
+    },
+    "compiler_install_verification": {
+      "command": "node scripts/verify-compiler-lock.cjs",
+      "exit_code": 0,
+      "packages": 8
+    },
+    "typecheck_final": {
+      "command": "npx --no-install tsc --noEmit",
+      "exit_code": 0,
+      "phase": "after archive schema fix"
+    },
+    "lint": {
+      "command": "npm run lint (quoted complete src glob)",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 290
+    },
+    "architecture_before_fix": {
+      "command": "npm run validate:arch (npx tsx)",
+      "exit_code": 1,
+      "cause": "undeclared tsx fetched mutable latest 4.23.15; local tsx IPC socket failed EPERM before architecture validation"
+    },
+    "architecture_after_fix": {
+      "command": "npm run validate:arch (locked ts-node)",
+      "exit_code": 0,
+      "message": "Architecture validation passed. No layer violations found."
+    },
+    "production_build_before_limits": {
+      "command": "npm run build (concurrent main and renderer)",
+      "exit_code": 1,
+      "main_exit_code": 0,
+      "renderer_exit_code": 1,
+      "diagnostic": "No compiler error or signal was present in the npm log. Cause unresolved; memory pressure is a hypothesis, not a finding."
+    },
+    "jest_initial": {
+      "success": false,
+      "numTotalTestSuites": 640,
+      "numPassedTestSuites": 636,
+      "numFailedTestSuites": 2,
+      "numPendingTestSuites": 2,
+      "numTotalTests": 11999,
+      "numPassedTests": 11977,
+      "numFailedTests": 2,
+      "numPendingTests": 20,
+      "schema_input": {
+        "path": "src/middleware/shared/vendor-document/protocol.ts",
+        "sha256": "bbe20dfdf318358a023588dab81b9446bfac1650468e9e068324cf747ebd8da1"
+      },
+      "command": "npx --no-install jest --config jest.config.json --collectCoverage --runInBand --ci --json",
+      "failed_suites": [
+        "src/middleware/shared/vendor-document/__tests__/configurator-client.test.ts",
+        "src/backend/shared/utils/vpp/__tests__/build-vpp-plugin-files.test.ts"
+      ]
+    },
+    "jest_archive_schema_after_fix": {
+      "success": true,
+      "numTotalTestSuites": 3,
+      "numPassedTestSuites": 3,
+      "numFailedTestSuites": 0,
+      "numTotalTests": 45,
+      "numPassedTests": 45,
+      "numFailedTests": 0,
+      "numPendingTests": 0,
+      "suites": [
+        {
+          "file": "src/middleware/shared/vendor-document/__tests__/configurator-client.test.ts",
+          "status": "passed",
+          "tests": 21
+        },
+        {
+          "file": "src/backend/shared/utils/vpp/__tests__/build-vpp-plugin-files.test.ts",
+          "status": "passed",
+          "tests": 19
+        },
+        {
+          "file": "src/middleware/shared/vendor-document/__tests__/archive-schema.test.ts",
+          "status": "passed",
+          "tests": 5
+        }
+      ],
+      "source_sha256": {
+        "src/middleware/shared/vendor-document/protocol.ts": "4a166f5ce99b7ac5ac5bce4c707b8a9726e15f9dbbb4bfd62f1b3e84746c5e25",
+        "src/middleware/shared/vendor-document/__tests__/archive-schema.test.ts": "3cf2dbc5afc16a7dc9e0495e0fd20cc21e4bdbfebb4857866e3db42f9fd0841a"
+      },
+      "qualification": "targeted regression after two observed Node22 Jest failures; not a full final-tree baseline or WB qualification",
+      "command": "npx --no-install jest --config jest.config.json --runInBand --no-coverage --runTestsByPath src/middleware/shared/vendor-document/__tests__/archive-schema.test.ts src/middleware/shared/vendor-document/__tests__/configurator-client.test.ts src/backend/shared/utils/vpp/__tests__/build-vpp-plugin-files.test.ts"
+    },
+    "renderer_bounded_diagnostic": {
+      "code": null,
+      "signal": "SIGKILL",
+      "timedOut": false,
+      "elapsedMs": 395646,
+      "interpretation": "The compiler process was killed abruptly with SIGKILL before final webpack stats. The 15-minute diagnostic timeout was not reached. Kernel/cgroup cause is unavailable; memory pressure remains a hypothesis.",
+      "command": "Direct webpack API, renderer production config, minifier workers=2, 15-minute outer diagnostic limit; exit code and signal captured by parent"
+    }
+  },
+  "compiler_smoke": {
+    "commands": [
+      "node node_modules/strucpp/dist/node/cli.js compiler-smoke.st -o compiler-smoke.cpp --no-line-mapping",
+      "g++ -std=c++14 -I node_modules/strucpp/src/runtime/include compiler-smoke.cpp compiler-smoke-main.cpp -o compiler-smoke",
+      "./compiler-smoke"
+    ],
+    "exit_codes": [
+      0,
+      0,
+      0
+    ],
+    "assertions": "Counter initializes at 0, reaches 2 after two enabled scans, remains 2 after a disabled scan.",
+    "sha256": {
+      "compiler-smoke.st": "161eaf53a8e1e1174407fc277c0c9fcfb3bb9dcae307ece43ea6a3072d057162",
+      "compiler-smoke-main.cpp": "bd79ed7d30f27aa37e3cd1e85f9b5ae4c955be7b6fada5b477c1d2d59702b2aa",
+      "compiler-smoke.cpp": "91204d2e92f00b7e1c9448943343c82f83f6dbe1a23f3f8c81712134a57c2a11",
+      "compiler-smoke.hpp": "787c54ef7f9c94a340b1f3b71d1b194352af2291312151c6238ff651d52bcfcb"
+    }
+  },
+  "limitations": [
+    "The compiler graph is locked; existing release/app native Electron installation remains a separate qualification surface.",
+    "A local smoke does not qualify WB runtime loading, I/O binding or application behavior.",
+    "The initial and final inputs differ; post-fix targeted runs must not be represented as an all-green full final baseline."
+  ]
+}

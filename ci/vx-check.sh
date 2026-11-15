@@ -19,7 +19,10 @@ finish() {
 trap finish EXIT
 node --version | tee reports/node.txt
 node -e 'if (process.versions.node.split(".")[0] !== "22") process.exit(1)'
+node --test scripts/test-compiler-lock.cjs 2>&1 | tee reports/compiler-lock-tests.log
+node scripts/verify-compiler-lock.cjs --lock-only > reports/compiler-lock-input.json
 npm ci 2>&1 | tee reports/npm-ci.log
+node scripts/verify-compiler-lock.cjs > reports/compiler-install.json
 npx --no-install tsc --noEmit 2>&1 | tee reports/types.log
 npm run lint 2>&1 | tee reports/lint.log
 npm run validate:arch 2>&1 | tee reports/architecture.log

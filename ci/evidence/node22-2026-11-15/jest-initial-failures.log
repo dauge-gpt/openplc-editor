@@ -1,0 +1,45 @@
+FAIL src src/middleware/shared/vendor-document/__tests__/configurator-client.test.ts
+  ● configurator client over the relay › refuses a snapshot whose archive is not bounded hex
+
+    expect(received).rejects.toBeInstanceOf(expected)
+
+    Expected constructor: ConfiguratorRemoteError
+    Received constructor: RangeError
+
+      102 |       if (!provider) throw new Error('the fake published no provider')
+      103 |       provider.getConfiguration = () => Promise.resolve(archive)
+    > 104 |       await expect(client.snapshot()).rejects.toBeInstanceOf(ConfiguratorRemoteError)
+          |                                               ^
+      105 |     }
+      106 |   })
+      107 |
+
+      at Object.toBeInstanceOf (node_modules/expect/build/index.js:2155:20)
+      at Object.<anonymous> (src/middleware/shared/vendor-document/__tests__/configurator-client.test.ts:104:47)
+
+FAIL src src/backend/shared/utils/vpp/__tests__/build-vpp-plugin-files.test.ts
+  ● buildVppPluginFiles › io-ranges format › refuses an archive that is not hex
+
+    RangeError: Maximum call stack size exceeded
+        at RegExp.test (<anonymous>)
+
+      272 |   const archive = (record as { archive?: unknown }).archive
+      273 |   if (archive === undefined || archive === '') return null
+    > 274 |   if (typeof archive !== 'string' || !configuratorArchiveSchema.safeParse(archive).success) return 'invalid'
+          |                                                                 ^
+      275 |   const bytes = new Uint8Array(archive.length / 2)
+      276 |   for (let i = 0; i < bytes.length; i++) bytes[i] = parseInt(archive.slice(i * 2, i * 2 + 2), 16)
+      277 |   return bytes
+
+      at ZodString._parse (node_modules/zod/dist/cjs/v3/types.js:654:48)
+      at ZodString._parseSync (node_modules/zod/dist/cjs/v3/types.js:106:29)
+      at ZodString.safeParse (node_modules/zod/dist/cjs/v3/types.js:135:29)
+      at safeParse (src/backend/shared/utils/vpp/build-vpp-plugin-files.ts:274:65)
+      at readConfiguratorArchive (src/backend/shared/utils/vpp/build-vpp-plugin-files.ts:154:23)
+      at build (src/backend/shared/utils/vpp/__tests__/build-vpp-plugin-files.test.ts:331:26)
+      at Object.<anonymous> (src/backend/shared/utils/vpp/__tests__/build-vpp-plugin-files.test.ts:368:30)
+
+Test Suites: 2 failed, 2 skipped, 636 passed, 638 of 640 total
+Tests:       2 failed, 20 skipped, 11977 passed, 11999 total
+Snapshots:   0 total
+Time:        1196.513 s
